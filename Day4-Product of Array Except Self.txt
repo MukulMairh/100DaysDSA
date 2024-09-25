@@ -1,0 +1,35 @@
+https://leetcode.com/problems/product-of-array-except-self/submissions/1402120920/
+
+var productExceptSelf = function(nums) {
+    //Brute force
+    // let arr=[];
+    // for (let i=0; i<nums.length; i++){
+    //     let result=1; 
+    //     for (let j=0; j<nums.length; j++){
+    //         if (i==j)
+    //             continue;
+    //         else 
+    //             result = result * nums[j];
+    //     }
+    //     arr[i]= result;
+    // }    
+    // return arr;
+
+    //Two pass, basically this product of elements towards left and right of the element
+    // nums= [1,2,3,4]
+    let len = nums.length;
+    let ans=[];
+    let prefix=1, postfix=1;
+    //ans=[1,1,2,6]
+    //prefix 
+    for (let i=0; i<len; i++){
+        ans[i]= prefix; 
+        prefix *=nums[i];
+    }
+    //postfix 
+    for (let i=len-1; i>=0; i--){
+        ans[i]*=postfix;//in reverse order --> 6,8, 12,24
+        postfix*= nums[i];//4,12,24,24
+    }
+    return ans;
+};
