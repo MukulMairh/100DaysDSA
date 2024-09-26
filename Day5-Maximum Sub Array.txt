@@ -1,0 +1,24 @@
+https://leetcode.com/problems/maximum-subarray/submissions/1403211007/
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+    let sum=0, max=0, output=0, possum=-99999, negsum=-99999;
+    for (let i=0; i<nums.length; i++){
+        sum+= nums[i];
+        if (sum>0){
+            //Condition for positives. 
+            max=sum; 
+            max>possum? possum=max: 0;
+        }
+        else {
+            sum=0;// as in case of [-2,1,-3,4,-1,2,1,-5,4], this subarray should break. 
+            nums[i]>negsum? negsum= nums[i]:0;
+        }
+    }
+    possum > negsum ?  output= possum : output= negsum;
+    return output;
+};
