@@ -1,0 +1,32 @@
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMin = function(nums) {
+    //O(n)
+    // let i=0, min=999999;
+    // for (i=0; i<nums.length; i++){
+    //     if (nums[i]<min){
+    //         min=nums[i]; 
+    //     }
+    // }
+    // return min;
+    //O(logn)
+    let left=0, right=nums.length-1;
+    if (nums[left]<=nums[right]){
+        return nums[left];
+    }
+    while (left<right){
+        let mid= Math.floor((left+right)/2);
+
+        if (nums[mid]>nums[right]){
+            left= mid+1;
+        }
+        else {
+            right= mid;
+        }    
+    }
+      return nums[left];
+};
