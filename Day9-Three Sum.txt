@@ -1,0 +1,46 @@
+https://leetcode.com/problems/3sum/submissions/1407390584/
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    const result = [];
+    // Step 1: Sort the array
+    nums.sort((a, b) => a - b);
+
+    // Step 2: Iterate over the array
+    for (let i = 0; i < nums.length - 2; i++) {
+        // Skip duplicate elements for `i` to avoid repeated triplets
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+        let left = i + 1;
+        let right = nums.length - 1;
+
+        // Step 3: Two-pointer approach
+        while (left < right) {
+            const sum = nums[i] + nums[left] + nums[right];
+            
+            if (sum === 0) {
+                // If we found a triplet, add it to the result
+                result.push([nums[i], nums[left], nums[right]]);
+
+                // Move both pointers and skip duplicates
+                while (left < right && nums[left] === nums[left + 1]) left++;
+                while (left < right && nums[right] === nums[right - 1]) right--;
+
+                // Move the pointers after finding a valid triplet
+                left++;
+                right--;
+            } else if (sum < 0) {
+                // If the sum is too small, move the left pointer to increase the sum
+                left++;
+            } else {
+                // If the sum is too large, move the right pointer to decrease the sum
+                right--;
+            }
+        }
+    }
+    
+    return result;
+};
