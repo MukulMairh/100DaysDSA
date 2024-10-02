@@ -1,0 +1,37 @@
+https://leetcode.com/problems/factorial-trailing-zeroes/
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var trailingZeroes = function(n) {
+    // let factorialValue=1;
+    let  trail=0; 
+
+//     if (n==0)
+//     factorialValue=1;
+
+//    while (n > 1) {
+//         factorialValue *= n;
+//         n--;
+//     }
+//     while (factorialValue % 10 === 0) {
+//         factorialValue = factorialValue / 10;
+//         trail++;  // Increase the count of trailing zeros
+//     }
+//     return trail;
+
+//Aprroach 1 failed some test cases and also it's stupid to calculate such large factorials and later devide them. 
+//Approach 2: 
+
+    if (n==0)trail=0; 
+    while (n>0){
+        n= Math.floor(n/5);
+        trail+= n;
+    }
+    return trail;
+};
+
+//Approach 3: Why cannot simply divide number by 5
+//But simply returning the integer part of n/5 and stopping there would miss higher powers of 5.
+// For example, in 25!, the number 25 contributes two factors of 5 (because 25 = 5 * 5),
+// while numbers like 5, 10, 15, 20 contribute just one factor of 5.
