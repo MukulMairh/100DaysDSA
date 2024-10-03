@@ -1,0 +1,31 @@
+https://leetcode.com/problems/trapping-rain-water/submissions/1410795347/
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function(height) {
+    let water =0, left =0, right = height.length -1;
+    maxleft=0, maxright=0, waterTrapped =0; 
+    while(left<right){
+        if (height[left]< height[right]){
+            if(height[left]>= maxleft){
+                maxleft= height[left];
+            }
+            else {
+                waterTrapped += maxleft - height[left];
+            }
+            left++;
+        }
+        else{
+            if (height[right]>= maxright){
+                maxright= height[right];
+            }
+            else{
+                waterTrapped+= maxright - height[right];
+            }
+            right --; 
+        }
+    }
+    return waterTrapped;
+};
