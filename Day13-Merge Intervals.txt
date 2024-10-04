@@ -1,0 +1,29 @@
+https://leetcode.com/problems/merge-intervals/submissions/1411857747/
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    if (intervals.length ===0) return  []; 
+
+    intervals.sort((a,b)=> a[0]- b[0]);
+
+    //intitializing output with first element 
+    let merged = [intervals[0]]; // [[1,3]]
+
+    for (let i=0; i< intervals.length ; i++){
+
+        let lastMerged = merged[merged.length -1]; // initially [[1,3]]
+        let currentInterval = intervals[i];
+
+        if (currentInterval[0]<= lastMerged[1]){
+            lastMerged[1]= Math.max (lastMerged[1], currentInterval[1]);
+        }
+        else{
+            merged.push(currentInterval);
+        }
+    }
+    return merged;
+    
+};
