@@ -1,0 +1,20 @@
+https://leetcode.com/problems/non-overlapping-intervals/submissions/1412873254/
+
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+var eraseOverlapIntervals = function(intervals) {
+    if (intervals.length==0)return 0;
+     intervals.sort((a,b)=> a[1] - b[1]); 
+    let count=0, prev_end = intervals[0][1]; 
+    for (let i =1; i <intervals.length; i++){
+        if (intervals[i][0]< prev_end){
+            count++
+        }
+        else{
+            prev_end= intervals[i][1];
+        }
+    }
+    return count;
+};
