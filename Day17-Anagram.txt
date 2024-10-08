@@ -1,0 +1,29 @@
+https://leetcode.com/problems/valid-anagram/submissions/1416179098/
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+// var isAnagram = function(s, t) {
+//     let arrS= s.split("");
+//     let arrT = t.split("");
+   
+//     let sLen = arrS.length, tLen= arrT.length;
+//     if(sLen!=tLen){
+//         return false;
+//     }else {
+//          arrS= arrS.sort(); arrT= arrT.sort(); 
+//         for (let i=0; i<sLen ; i++){
+//             if (arrS[i]!= arrT[i]){
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
+// };
+
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false;
+    return s.split('').sort().join('') === t.split('').sort().join('');
+};
