@@ -1,0 +1,51 @@
+https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+// var lengthOfLongestSubstring = function(s) {
+
+    
+//     let arr = s.split(''), temp=[]; 
+//     let max=0;
+
+//     if (arr.length==0) return 0;
+
+//     for (let i=0; i<arr.length; i++){
+//         if(temp.includes(arr[i])){
+//             if (temp.length >max){
+//                 max= temp.length;
+//             } 
+//             temp= [];
+//             temp.push(arr[i]);
+//         }
+//           else {
+//                 temp.push(arr[i]);
+//             }
+//     }
+//      max = Math.max(max, temp.length); // To include the s=" " 
+//     return max;
+// };
+
+
+//Above didn't work for some test cases. 
+var lengthOfLongestSubstring = function(s) {
+    let temp = [];
+    let max = 0;
+
+    for (let i = 0; i < s.length; i++) {
+        // If the character is already in the temp array, remove characters until it's gone
+        if (temp.includes(s[i])) {
+            while (temp.includes(s[i])) {
+                temp.shift(); // Shift elements from the start of the temp array
+            }
+        }
+        // Add the current character to the temp array
+        temp.push(s[i]);
+        // Update the maximum length found so far
+        max = Math.max(max, temp.length);
+    }
+
+    return max;
+};
