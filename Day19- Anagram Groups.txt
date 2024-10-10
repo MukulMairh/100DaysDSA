@@ -1,0 +1,25 @@
+https://leetcode.com/problems/group-anagrams/submissions/1418318122/
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) {
+    let map = {};  // This will store the groups of anagrams
+
+    for (let str of strs) {
+        // Sort the string to use as a key
+        let sorted = str.split('').sort().join('');
+        
+        // If the sorted string is already a key in the map, add the original string
+        // Otherwise, initialize a new array with the current string
+        if (map[sorted]) {
+            map[sorted].push(str);
+        } else {
+            map[sorted] = [str];
+        }
+    }
+
+    // Return all the grouped anagrams
+    return Object.values(map);
+};
