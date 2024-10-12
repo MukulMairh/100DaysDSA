@@ -1,0 +1,43 @@
+https://leetcode.com/problems/minimum-window-substring/submissions/1420236740/
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function(s, t) {
+    let need = {};
+    for (let char of t) {
+        need[char] = (need[char] || 0) + 1;
+    }
+    
+    let left = 0;
+    let right = 0;
+    let minLength = Infinity;
+    let start = 0;
+    let required = t.length;
+    
+    while (right < s.length) {
+        // If s[right] is part of t, decrease the required count
+        if (need[s[right]] !== undefined) {
+            if (need[s[right]] > 0) required--;
+            need[s[right]]--;
+        }
+        right++;
+        
+        // Once we've found a valid window, try to shrink it
+        while (required === 0) {
+            if (right - left < minLength) {
+                minLength = right - left;
+                start = left;
+            }
+            
+            if (need[s[left]] !== undefined) {
+                need[s[left]]++;
+                if (need[s[left]] > 0) required++;
+            }
+            left++;
+        }
+    }
+    
+    return minLength === Infinity ? "" : s.substring(start, start + minLength);
+};
