@@ -1,0 +1,25 @@
+https://leetcode.com/problems/valid-palindrome/submissions/1421238493/
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    // Step 1: Clean the input string to remove non-alphanumeric characters and convert to lowercase
+    s = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    
+    // Step 2: Use two pointers to compare characters from the beginning and the end
+    let left = 0;
+    let right = s.length - 1;
+    
+    while (left < right) {
+        // Compare characters
+        if (s[left] !== s[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    
+    return true;
+};
