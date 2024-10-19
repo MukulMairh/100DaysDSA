@@ -1,0 +1,26 @@
+https://leetcode.com/problems/reverse-linked-list/submissions/1427565446/
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    let prev = null;
+    let current = head;
+
+    while (current !== null) {
+        let next = current.next; // Store the next node
+        current.next = prev;     // Reverse the current node's pointer
+        prev = current;          // Move prev forward
+        current = next;          // Move current forward
+    }
+
+    return prev;  // prev becomes the new head
+};
