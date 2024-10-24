@@ -1,0 +1,46 @@
+https://leetcode.com/problems/merge-k-sorted-lists/submissions/1432701989/
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+var mergeKLists = function(lists) {
+    if (lists.length === 0) return null;
+
+    const minHeap = new MinPriorityQueue({priority: x => x.val});
+
+    // Add the first node of each list to the heap
+    for (let i = 0; i < lists.length; i++) {
+        if (lists[i]) minHeap.enqueue(lists[i]);
+    }
+
+    const dummy = new ListNode();
+    let current = dummy;
+
+    // Extract the smallest node from the heap, add it to the result, and insert the next node
+    while (!minHeap.isEmpty()) {
+        const smallestNode = minHeap.dequeue().element;
+        current.next = smallestNode;
+        current = current.next;
+        
+        if (smallestNode.next) {
+            minHeap.enqueue(smallestNode.next);
+        }
+    }
+
+    return dummy.next;
+};
