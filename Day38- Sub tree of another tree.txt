@@ -1,0 +1,29 @@
+https://leetcode.com/problems/subtree-of-another-tree/
+
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} subRoot
+ * @return {boolean}
+ */
+var isSubtree = function(root, subRoot) {
+    if (!root) return false; // If root is null, it can't contain subRoot.
+    if (isSameTree(root, subRoot)) return true; // Check if current subtree matches.
+    // Recur on left and right subtree.
+    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+var isSameTree = function(s, t) {
+    if (!s && !t) return true; // Both are null, so they match.
+    if (!s || !t || s.val !== t.val) return false; // If only one is null or values don't match.
+    // Check left and right children.
+    return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
+};
